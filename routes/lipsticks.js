@@ -30,14 +30,17 @@ router.post('/', async(req, res)=> {
 
 router.put('/:id', async (req, res)=> {
   try {
-    const singleLipstick = await Lipstick.findById(req.params.id)
+    let singleLipstick = await Lipstick.findById(req.params.id)
     if(!singleLipstick) return res.status(404).json({msg: `NOT FOUND`})
   
-    else {
-      singleLipstick = req.body
+   
+      singleLipstick.brand = req.body.brand
+      singleLipstick.color = req.body.color
+      singleLipstick.desc = req.body.desc
+      singleLipstick.mini = req.body.mini
       await singleLipstick.save()
       return res.json({singleLipstick})
-    }
+
   } catch (error) {
     console.error(error.message);
     res.status(500).json({msg: `SERVER ERROR`})
@@ -50,10 +53,10 @@ router.delete('/:id', async(req, res)=> {
     const singleLipstick = await Lipstick.findById(req.params.id)
     if(!singleLipstick) return res.status(404).json({msg: `NOT FOUND`})
 
-    else {
-      await lipstick.remove()
+ 
+      await singleLipstick.remove()
       return res.json({msg: `Lipstick Deleted`})
-    }
+
   } catch (error) {
     console.error(error.message)
     res.status(500).json({msg: `SERVER ERROR`})
