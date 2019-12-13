@@ -4,13 +4,14 @@ const path = require('cors')
 
 
 const app = express()
-// connectDB()
+connectDB()
 app.use(express.json({extended: false}))
 
 app.get('/', (req,res)=> {
     res.send("API Running...")
 })
 
+app.use('/lipsticks', require('./routes/lipsticks.js'))
 
 
 // //SERVE STATIC ASSET
