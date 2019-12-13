@@ -1,4 +1,8 @@
 export default {
 
-  test: "TESTING"
+  test: "TESTING",
+  lipstickObject : {
+    lipsticks: [],
+    loading: true
+  }
 }

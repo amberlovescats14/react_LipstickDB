@@ -1,17 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-const Landing = props => {
-  console.log(props);
+export default function Landing(props) {
+  const {test} = props
+ 
   return (
     <div>
-      <h1>Landing</h1>
+      <h2>landing</h2>
+      {test}
     </div>
   )
 }
-
-Landing.propTypes = {
-  // test: PropTypes.string.isRequired
-}
-
-export default Landing
