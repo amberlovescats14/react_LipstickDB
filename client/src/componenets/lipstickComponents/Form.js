@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import {Paper, TextField, Select, InputLabel, FormControl, FormGroup, FormControlLabel, Checkbox } from '@material-ui/core'
-import MenuItem from '@material-ui/core/MenuItem';
+import {Paper, TextField, Select, InputLabel, FormControl, FormGroup, FormControlLabel, Checkbox, Fab} from '@material-ui/core'
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
 import red from '@material-ui/core/colors/red'
@@ -13,6 +13,7 @@ const WatermelonCheckbox = withStyles({
     '&$checked': {
       color: watermelon,
     },
+    marginLeft: "20px"
   },
   checked: {},
 })(props => <Checkbox color="default" {...props} />);
@@ -20,10 +21,17 @@ const WatermelonCheckbox = withStyles({
 const useStyles = makeStyles(theme => ({
   root: {
     '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      width: 200,
+      margin: theme.spacing(1.5),
+      width: '90%',
     },
   },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+  },
+  formG: {
+    width: '50%',
+    margin: 'auto'
+  }
 }));
 
 
@@ -32,27 +40,38 @@ const useStyles = makeStyles(theme => ({
 
 export default function Form() {
   const classes = useStyles();
-
-  // const [size, setSize] = React.useState(true)
-
-  // const handleChange = e => {
-  //     setSize(e.target.value)
-  // };
-
-
+  const [values, setValues] = React.useState({
+    brand: '',
+    color: '',
+    desc: '',
+    mini: false
+  })
   const [state, setState] = React.useState({
     checkedMini: true,
-    checkedFullSize: true,
-
   });
-
+  const handleChange = name => event => {
+    setState({ ...state, [name]: event.target.checked });
+  };
+  const handleChangeBrand = brand => (e) => {
+    setValues({...values, [brand]: e.target.value})
+  }
+  const handleChangeColor = color => (e) => {
+    setValues({...values, [color]: e.target.value})
+  }
+  const handleChangeDesc = desc => (e) => {
+    console.log('ee')
+    setValues({...values, [desc]: e.target.value})
+  }
+  const handleSubmit = () => {
+    console.log("values: ", values);
+  }
 
 
   return (
     <Paper>
-      <FormGroup>
        <form className={classes.root} noValidate autoComplete="off">
        <TextField
+          onChange={(e)=> handleChangeBrand(e)}
           id="brand"
           label="Brand"
           type="text"
@@ -62,6 +81,7 @@ export default function Form() {
           variant="outlined"
         />
         <TextField
+          onChange={(e)=> handleChangeColor(e)}
           id="color"
           label="Color"
           type="text"
@@ -71,6 +91,7 @@ export default function Form() {
           variant="outlined"
         />
                 <TextField
+                onChange={(e)=> handleChangeDesc(e)}
           id="outlined-multiline-static"
           label="Descrpition"
           multiline
@@ -82,14 +103,17 @@ export default function Form() {
         control={
           <WatermelonCheckbox
             checked={state.checkedMini}
-            onChange={handleChange('checkedG')}
+            onChange={handleChange('checkedMini')}
             value="true"
           />
         }
         label="Mini"
       />
+      <Fab variant="extended" onClick={()=> handleSubmit()}>
+      <FavoriteIcon className={classes.extendedIcon} />
+        Add 
+      </Fab>
        </form>
-       </FormGroup>
     </Paper>
   )
 }

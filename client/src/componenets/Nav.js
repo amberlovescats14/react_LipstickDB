@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DehazeIcon from '@material-ui/icons/Dehaze';
 import MailIcon from '@material-ui/icons/Mail';
@@ -13,7 +12,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import {AppBar, Typography} from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import red from '@material-ui/core/colors/red'
-import { withTheme } from '@material-ui/styles';
 
 const watermelon = red[600]
 
