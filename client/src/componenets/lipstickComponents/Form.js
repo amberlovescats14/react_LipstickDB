@@ -38,40 +38,49 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function Form() {
+export default function Form(props) {
+  const { addLipstick } = props
   const classes = useStyles();
-  const [values, setValues] = React.useState({
+
+  const [state, setState] = React.useState({
+    checkedMini: true,
     brand: '',
     color: '',
     desc: '',
-    mini: false
-  })
-  const [state, setState] = React.useState({
-    checkedMini: true,
+
   });
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });
   };
-  const handleChangeBrand = brand => (e) => {
-    setValues({...values, [brand]: e.target.value})
+  const handleChangeBrand = brand => e => {
+    console.log('slkdf')
+    setState({...state, [brand]: e.target.value})
   }
-  const handleChangeColor = color => (e) => {
-    setValues({...values, [color]: e.target.value})
+  const handleChangeColor = color => e => {
+    setState({...state, [color]: e.target.value})
   }
-  const handleChangeDesc = desc => (e) => {
+  const handleChangeDesc = desc => e => {
     console.log('ee')
-    setValues({...values, [desc]: e.target.value})
+    setState({...state, [desc]: e.target.value})
   }
-  const handleSubmit = () => {
-    console.log("values: ", values);
+  const handleSubmit = (e) => {
+    // e.preventDefault()
+    const { brand, color, desc, checkedMini} = state
+    let values = {
+      brand,
+      color,
+      desc,
+      mini: checkedMini
+    }
+    addLipstick(values)
   }
 
 
   return (
     <Paper>
-       <form className={classes.root} noValidate autoComplete="off">
+       <form className={classes.root}  autoComplete="off">
        <TextField
-          onChange={(e)=> handleChangeBrand(e)}
+          onChange={handleChangeBrand('brand')}
           id="brand"
           label="Brand"
           type="text"
@@ -79,9 +88,9 @@ export default function Form() {
             shrink: true,
           }}
           variant="outlined"
+          value={state.brand}
         />
         <TextField
-          onChange={(e)=> handleChangeColor(e)}
           id="color"
           label="Color"
           type="text"
@@ -89,15 +98,18 @@ export default function Form() {
             shrink: true,
           }}
           variant="outlined"
+          value={state.color}
+          onChange={handleChangeColor('color')}
+
         />
                 <TextField
-                onChange={(e)=> handleChangeDesc(e)}
-          id="outlined-multiline-static"
+                onChange={handleChangeDesc('desc')}
+          id="desc"
           label="Descrpition"
           multiline
           rows="4"
-          defaultValue=" "
           variant="outlined"
+          value={state.desc}
         />
           <FormControlLabel
         control={
@@ -109,7 +121,7 @@ export default function Form() {
         }
         label="Mini"
       />
-      <Fab variant="extended" onClick={()=> handleSubmit()}>
+      <Fab variant="extended" onClick={(e)=> handleSubmit(e)} type="button">
       <FavoriteIcon className={classes.extendedIcon} />
         Add 
       </Fab>

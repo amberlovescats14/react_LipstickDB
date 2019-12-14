@@ -9,7 +9,7 @@ const blue = lightBlue[200]
 const useStyles = makeStyles({
   root: {
     background: blue,
-    height: '100vh'
+    height: '100%'
   }
 })
 function App() {

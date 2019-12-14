@@ -24,12 +24,13 @@ export const addLipstick = (values) => async (dispatch, getState) => {
     }
   }
   try {
-    const res = axios.post('/lipsticks', values, config)
+    const res = await axios.post('/lipsticks', values, config)
+    console.log('RES:',  res.data)
     dispatch({
       type: `ADD_LIPSTICK`,
       payload: {
         oldArray: lipstickObject.lipsticks,
-        newPosts: res.data
+        newLipstick: res.data
       }
     })
   } catch (error) {

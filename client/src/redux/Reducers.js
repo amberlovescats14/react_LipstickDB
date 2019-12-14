@@ -20,6 +20,14 @@ export const getLipsticks = (state = lipstickState, action) => {
       lipsticks : payload,
       loading: false
     }
+    case `ADD_LIPSTICK`:
+    let arr = payload.oldArray.concat(payload.newLipstick)
+    console.log(arr)
+    return {
+      ...state,
+      lipsticks: arr.reverse(),
+      loading: false
+    }
     default: return state
   }
 }

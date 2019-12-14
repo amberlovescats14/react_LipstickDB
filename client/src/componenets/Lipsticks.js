@@ -1,7 +1,7 @@
 import React from 'react'
 import {Grid }from '@material-ui/core'
 import CardContainer from '../containers/CardContainer'
-import Form from './lipstickComponents/Form'
+import FormContainer from '../containers/FormContainer'
 
 
 
@@ -11,7 +11,7 @@ export default function Lipsticks(props) {
     <div>
       <Grid container>
         <Grid item xs={12} md={6}>
-          <Form/>
+          <FormContainer/>
         </Grid>
         <Grid item xs={12} md={6}>
           <CardContainer/>
