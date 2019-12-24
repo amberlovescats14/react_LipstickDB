@@ -14,13 +14,19 @@ const LipstickSchema = new Schema({
     min: 3,
     max: 20
   },
+  name: {
+    type: String,
+    required: true,
+    min: 2,
+    max: 3
+  },
   desc: {
     type: String,
     required: true,
     min: 3,
     max: 50
   },
-  mini: {
+  full: {
     type: Boolean,
     require: true,
   },

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Paper, TextField, Select, InputLabel, FormControl, FormGroup, FormControlLabel, Checkbox, Fab} from '@material-ui/core'
+import {Paper, TextField,FormControlLabel, Checkbox, Fab, MenuItem} from '@material-ui/core'
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
@@ -18,23 +18,38 @@ const WatermelonCheckbox = withStyles({
   checked: {},
 })(props => <Checkbox color="default" {...props} />);
 
+const colorsArr = [
+  {
+    value: 'red',
+    label: 'Red'
+  },
+  {
+    value: 'pink',
+    label: 'Pink'
+  },
+  {
+    value: 'maroon',
+    label: 'Maroon'
+  },
+  {
+    value: 'orange',
+    label: 'Orange'
+  }
+]
+
+
 const useStyles = makeStyles(theme => ({
   root: {
     '& .MuiTextField-root': {
-      margin: theme.spacing(1.5),
-      width: '90%',
+      margin: theme.spacing(1),
+      width: 150,
     },
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  extendedIcon: {
-    marginRight: theme.spacing(1),
-  },
-  formG: {
-    width: '50%',
-    margin: 'auto'
-  }
 }));
-
-
 
 
 
@@ -42,44 +57,46 @@ export default function Form(props) {
   const { addLipstick } = props
   const classes = useStyles();
 
-  const [state, setState] = React.useState({
-    checkedMini: true,
+  const [state, setState] = useState({
+    checkedFull: true,
     brand: '',
     color: '',
+    name: '',
     desc: '',
-
   });
-  const handleChange = name => event => {
-    setState({ ...state, [name]: event.target.checked });
+  const handleChange = full => event => {
+    setState({ ...state, [full]: event.target.checked });
   };
   const handleChangeBrand = brand => e => {
-    console.log('slkdf')
     setState({...state, [brand]: e.target.value})
   }
   const handleChangeColor = color => e => {
     setState({...state, [color]: e.target.value})
+  };
+  const handleChangeName = name => e => {
+    setState({...state, [name]: e.target.value})
   }
   const handleChangeDesc = desc => e => {
-    console.log('ee')
     setState({...state, [desc]: e.target.value})
   }
   const handleSubmit = (e) => {
-    // e.preventDefault()
-    const { brand, color, desc, checkedMini} = state
+    const { brand, color, name, desc, checkedFull} = state
     let values = {
       brand,
       color,
+      name,
       desc,
-      mini: checkedMini
+      full: checkedFull
     }
     addLipstick(values)
   }
 
 
   return (
-    <Paper>
+    <Paper style={{marginLeft: '10%'}}>
        <form className={classes.root}  autoComplete="off">
        <TextField
+          required
           onChange={handleChangeBrand('brand')}
           id="brand"
           label="Brand"
@@ -90,41 +107,67 @@ export default function Form(props) {
           variant="outlined"
           value={state.brand}
         />
-        <TextField
-          id="color"
+        {/* select */}
+         <TextField
+          required
+          id="outlined-select-currency"
+          select
           label="Color"
+          value={state.color}
+          onChange={handleChangeColor('color')}
+          variant="outlined"
+          InputLabelProps={{
+            shrink: true,
+          }}
+        >
+          {colorsArr.map(option => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+        {/* end select */}
+        <TextField
+          required
+          id="name"
+          label="Name"
           type="text"
           InputLabelProps={{
             shrink: true,
           }}
           variant="outlined"
-          value={state.color}
-          onChange={handleChangeColor('color')}
+          value={state.name}
+          onChange={handleChangeName('name')}
 
         />
-                <TextField
-                onChange={handleChangeDesc('desc')}
+          <TextField
+          required
+          onChange={handleChangeDesc('desc')}
           id="desc"
+          type="text"
           label="Descrpition"
-          multiline
-          rows="4"
           variant="outlined"
+          InputLabelProps={{
+            shrink: true,
+          }}
           value={state.desc}
         />
+        <div>
           <FormControlLabel
         control={
           <WatermelonCheckbox
-            checked={state.checkedMini}
-            onChange={handleChange('checkedMini')}
+            checked={state.checkedFull}
+            onChange={handleChange('checkedFull')}
             value="true"
           />
         }
-        label="Mini"
+        label="Full Size"
       />
       <Fab variant="extended" onClick={(e)=> handleSubmit(e)} type="button">
       <FavoriteIcon className={classes.extendedIcon} />
         Add 
       </Fab>
+      </div>
        </form>
     </Paper>
   )

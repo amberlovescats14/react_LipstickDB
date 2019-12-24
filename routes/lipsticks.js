@@ -17,8 +17,9 @@ router.post('/', async(req, res)=> {
     const newLipstick = new Lipstick({
       brand: req.body.brand,
       color: req.body.color,
+      name: req.body.name,
       desc: req.body.desc,
-      mini: req.body.mini
+      full: req.body.full
     })
     const save = await newLipstick.save()
     return res.json(save)
@@ -36,8 +37,9 @@ router.put('/:id', async (req, res)=> {
    
       singleLipstick.brand = req.body.brand
       singleLipstick.color = req.body.color
+      singleLipstick.name = req.body.name
       singleLipstick.desc = req.body.desc
-      singleLipstick.mini = req.body.mini
+      singleLipstick.full = req.body.full
       await singleLipstick.save()
       return res.json({singleLipstick})
 
