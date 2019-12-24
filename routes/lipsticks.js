@@ -41,7 +41,8 @@ router.put('/:id', async (req, res)=> {
       singleLipstick.desc = req.body.desc
       singleLipstick.full = req.body.full
       await singleLipstick.save()
-      return res.json({singleLipstick})
+      let allLipsticks = await Lipstick.find()
+      return res.json(allLipsticks)
 
   } catch (error) {
     console.error(error.message);

@@ -11,8 +11,8 @@ export default function Cards(props) {
 
   return (
       loading ? <Loading/> :
-      lipsticks.map((l,i)=> (
-        <OneCard l={l} i={i} key={i}/>
+      lipsticks.reverse().map((l,i)=> (
+        <OneCard l={l} i={i} key={i} lipsticks={lipsticks}/>
       ))
    
   )

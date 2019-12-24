@@ -19,11 +19,6 @@ const useStyles = makeStyles({
   root: {
     background: watermelon,
     color: 'white',
-    // width: '100vw',
-    // display: 'flex',
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
-    // padding: '10px'
   },
   list: {
     width: 250
@@ -81,6 +76,13 @@ export default function TemporaryDrawer(props) {
             <MailIcon/>
             <ListItemText>
               <Link to='/lipsticks' className={classes.anchors}>Lipsticks-DB</Link>
+              </ListItemText>
+          </ListItem>
+      <Divider />
+      <ListItem button>
+            <MailIcon/>
+            <ListItemText>
+              <Link to='/inventory' className={classes.anchors}>Inventory</Link>
               </ListItemText>
           </ListItem>
       <Divider />

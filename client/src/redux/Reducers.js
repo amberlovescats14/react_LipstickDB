@@ -28,6 +28,12 @@ export const getLipsticks = (state = lipstickState, action) => {
       lipsticks: arr.reverse(),
       loading: false
     }
+    case `UPDATE_LIPSTICK`:
+    return {
+      ...state,
+      lipsticks: payload.lipsticks,
+      loading: false
+    }
     default: return state
   }
 }

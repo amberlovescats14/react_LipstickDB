@@ -53,16 +53,16 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function Form(props) {
-  const { addLipstick } = props
+export default function LipstickEdit(props) {
+  const { lipstick, updateLipstick, handleClose } = props
   const classes = useStyles();
 
   const [state, setState] = useState({
-    checkedFull: true,
-    brand: '',
-    color: '',
-    name: '',
-    desc: '',
+    checkedFull: lipstick.full,
+    brand: lipstick.brand,
+    color: lipstick.color,
+    name: lipstick.name,
+    desc: lipstick.desc,
   });
   const handleChange = full => event => {
     setState({ ...state, [full]: event.target.checked });
@@ -88,7 +88,8 @@ export default function Form(props) {
       desc,
       full: checkedFull
     }
-    addLipstick(values)
+    updateLipstick(lipstick._id, values)
+    handleClose()
   }
 
 
@@ -165,7 +166,7 @@ export default function Form(props) {
       />
       <Fab variant="extended" onClick={(e)=> handleSubmit(e)} type="button">
       <FavoriteIcon className={classes.extendedIcon} />
-        Add 
+        Update 
       </Fab>
       </div>
        </form>

@@ -38,3 +38,29 @@ export const addLipstick = (values) => async (dispatch, getState) => {
     console.log("POST ERROR");
   }
 }
+
+
+//! UPDATE 
+export const updateLipstick = (id, values) => async (dispatch, getState) => {
+  const { lipstickObject} = getState()
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  try {
+    const res = await axios.put(`/lipsticks/${id}`, values, config)
+
+    dispatch({
+      type: `UPDATE_LIPSTICK`,
+      payload: {
+        id,
+        lipsticks: res.data
+      }
+    })
+  } catch (error) {
+    console.error(error.message)
+    console.log(`EDIT ERROR`)
+  }
+
+}
