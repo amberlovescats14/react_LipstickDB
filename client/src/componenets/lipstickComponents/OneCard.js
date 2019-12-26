@@ -1,5 +1,5 @@
 import React, {Fragment, useState} from 'react'
-import { Card, CardContent, Typography, Fab, Paper} from '@material-ui/core'
+import { Card, CardContent, Typography, Fab} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import deepOrange from '@material-ui/core/colors/deepOrange'
 import red from '@material-ui/core/colors/red'
@@ -7,6 +7,7 @@ import pink from '@material-ui/core/colors/pink'
 import CreateIcon from '@material-ui/icons/Create';
 import Modal from '@material-ui/core/Modal';
 import LipstickEdit from '../../containers/LipstickEditContainer';
+import MoodBadIcon from '@material-ui/icons/MoodBad';
 
 
 const watermelon = red[600]
@@ -47,11 +48,12 @@ const useStyles = makeStyles(theme => ({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
-  }
+  },
+
 }))
 
 const OneCard = (props) => {
-  const {l, i, lipsticks} = props
+  const {l, i, deleteLipstick} = props
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
@@ -63,6 +65,9 @@ const OneCard = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleDelete = () => {
+    deleteLipstick(l._id)
+  }
   return (
     <Fragment>
           <Card className={classes.root}
@@ -76,10 +81,17 @@ const OneCard = (props) => {
                 type="button"
                 size="small"
                 style={{float: 'right'}}
+                onClick={handleDelete}>
+              <MoodBadIcon className={classes.extendedIcon} />
+              </Fab>
+              <Fab variant="extended"
+                type="button"
+                size="small"
+                style={{float: 'right'}}
                 onClick={handleOpen}>
               <CreateIcon className={classes.extendedIcon} />
-                Edit 
               </Fab>
+
             </CardContent>
             <CardContent className={classes.desc}>
             <Typography variant="subtitle1">

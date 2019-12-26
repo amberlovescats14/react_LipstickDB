@@ -42,7 +42,6 @@ export const addLipstick = (values) => async (dispatch, getState) => {
 
 //! UPDATE 
 export const updateLipstick = (id, values) => async (dispatch, getState) => {
-  const { lipstickObject} = getState()
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -61,6 +60,26 @@ export const updateLipstick = (id, values) => async (dispatch, getState) => {
   } catch (error) {
     console.error(error.message)
     console.log(`EDIT ERROR`)
+  }
+
+}
+
+//! DELETE
+export const deleteLipstick = (id) => async (dispatch, getState) => {
+  const {lipstickObject} = getState()
+  console.log(lipstickObject.lipsticks)
+  try {
+    await axios.delete(`/lipsticks/${id}`)
+    dispatch({
+      type: `DELETE_LIPSTICK`,
+      payload: {
+        id,
+        oldArr: lipstickObject.lipsticks
+      }
+    })
+  } catch (error) {
+    console.error(error.message)
+    console.log('DELETE ERROR')
   }
 
 }

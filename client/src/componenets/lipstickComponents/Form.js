@@ -163,7 +163,9 @@ export default function Form(props) {
         }
         label="Full Size"
       />
-      <Fab variant="extended" onClick={(e)=> handleSubmit(e)} type="button">
+      <Fab variant="extended" onClick={(e)=> handleSubmit(e)} 
+      type="button"
+      size="small">
       <FavoriteIcon className={classes.extendedIcon} />
         Add 
       </Fab>

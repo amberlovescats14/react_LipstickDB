@@ -34,6 +34,12 @@ export const getLipsticks = (state = lipstickState, action) => {
       lipsticks: payload.lipsticks,
       loading: false
     }
+    case `DELETE_LIPSTICK`:
+    return {
+      ...state,
+      lipsticks: payload.oldArr.filter(l => l._id !== payload.id),
+      loading: false
+    }
     default: return state
   }
 }

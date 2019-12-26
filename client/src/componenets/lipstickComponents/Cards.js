@@ -3,7 +3,7 @@ import OneCard from './OneCard'
 import Loading from '../util/Loading'
 
 export default function Cards(props) {
-  const { getLipsticks, lipstickObject} = props
+  const { getLipsticks, deleteLipstick, lipstickObject} = props
   const { lipsticks, loading } = lipstickObject
   useEffect(()=> {
     getLipsticks()
@@ -12,7 +12,9 @@ export default function Cards(props) {
   return (
       loading ? <Loading/> :
       lipsticks.reverse().map((l,i)=> (
-        <OneCard l={l} i={i} key={i} lipsticks={lipsticks}/>
+        <OneCard l={l} i={i} key={i}
+         lipsticks={lipsticks}
+         deleteLipstick={deleteLipstick}/>
       ))
    
   )

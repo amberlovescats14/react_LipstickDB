@@ -55,8 +55,6 @@ router.delete('/:id', async(req, res)=> {
   try {
     const singleLipstick = await Lipstick.findById(req.params.id)
     if(!singleLipstick) return res.status(404).json({msg: `NOT FOUND`})
-
- 
       await singleLipstick.remove()
       return res.json({msg: `Lipstick Deleted`})
 

@@ -52,8 +52,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SearchBar() {
+export default function SearchBar(props) {
+  const { manipulate } = props
   const classes = useStyles();
+  const handleChange = change => (e) => {
+    manipulate(e.target.value)
+  }
+  
+
 
   return (
     <div className={classes.root}>
@@ -64,6 +70,7 @@ export default function SearchBar() {
               <SearchIcon />
             </div>
             <InputBase
+              onChange={handleChange('change')}
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,

@@ -1,6 +1,6 @@
 import Cards from '../componenets/lipstickComponents/Cards'
 import { connect } from 'react-redux'
-import { getLipsticks } from '../redux/Actions'
+import { getLipsticks, deleteLipstick } from '../redux/Actions'
 
 const mapStateToProps = state => ({
   test: state.test,
@@ -8,7 +8,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getLipsticks : () => dispatch(getLipsticks())
+  getLipsticks : () => dispatch(getLipsticks()),
+  deleteLipstick: (id) => dispatch(deleteLipstick(id))
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cards)
